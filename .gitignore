@@ -1,6 +1,6 @@
 cache/
 __pycache__/
-tries*
+*tries*.py
 
 *.pyc
 
