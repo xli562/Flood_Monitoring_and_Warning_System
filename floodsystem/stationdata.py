@@ -10,7 +10,7 @@ from . import datafetcher
 from .station import MonitoringStation
 
 
-def build_station_list(use_cache=True):
+def build_station_list(use_cache=True) -> list:
     """Build and return a list of all river level monitoring stations
     based on data fetched from the Environment agency. Each station is
     represented as a MonitoringStation object.
@@ -63,7 +63,7 @@ def build_station_list(use_cache=True):
     return stations
 
 
-def update_water_levels(stations):
+def update_water_levels(stations) -> None:
     """Attach level data contained in measure_data to stations"""
 
     # Fetch level data

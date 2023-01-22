@@ -6,7 +6,7 @@
 """
 
 
-def sorted_by_key(x, i, reverse=False):
+def sorted_by_key(x, i, reverse=False) -> list:
     """For a list of lists/tuples, return list sorted by the ith
     component of the list/tuple, E.g.
 
