@@ -23,3 +23,20 @@ def stations_by_distance(stations:list, p:tuple) -> list:
 
     return sorted_by_key(lst, 2)   # Sorts list according to distance
 
+def stations_within_radius(stations: list, centre: tuple, r: float or int) -> list:
+    """A function that returns a list of all stations (type MonitoringStation) 
+    within radius r of a geographic coordinate.
+
+    [stations] is a list of MonitoringStation objects, 
+    [centre] is the coordinate x
+    [r] is the radius."""
+
+    lst = []
+    fr = float(r)
+    for station in stations:
+        distance = haversine(station.coord, centre)
+        if distance <= fr:
+            lst.append(station)
+    return lst
+
+
