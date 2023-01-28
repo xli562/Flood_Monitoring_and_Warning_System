@@ -23,6 +23,24 @@ def stations_by_distance(stations:list, p:tuple) -> list:
 
     return sorted_by_key(lst, 1)   # Sorts list according to distance
 
+def rivers_with_station(stations):
+    """given a list of station objects, returns a container (list/tuple/set) 
+    with the names of the rivers with a monitoring station. """
+
+    river = set()
+    for station in stations:
+        river.append(station.river)
+
+    return river
+
+def stations_by_river(stations):
+    """implement a function that returns a Python dict (dictionary) that maps river names (the ‘key’) to a list of station objects on a given river."""
+
+    dict = {}
+    for station in stations:
+        dict[station.river] = station.name
+    
+    return dict
 def stations_within_radius(stations: list, centre: tuple, r: float or int) -> list:
     """A function that returns a list of all stations (type MonitoringStation) 
     within radius r of a geographic coordinate.
