@@ -41,3 +41,20 @@ def stations_by_river(stations):
         dict[station.river] = station.name
     
     return dict
+def stations_within_radius(stations: list, centre: tuple, r: float or int) -> list:
+    """A function that returns a list of all stations (type MonitoringStation) 
+    within radius r of a geographic coordinate.
+
+    [stations] is a list of MonitoringStation objects, 
+    [centre] is the coordinate x
+    [r] is the radius."""
+
+    lst = []
+    fr = float(r)
+    for station in stations:
+        distance = haversine(station.coord, centre)
+        if distance <= fr:
+            lst.append(station)
+    return lst
+
+
