@@ -19,9 +19,9 @@ def stations_by_distance(stations:list, p:tuple) -> list:
     lst = []     # The list to be returned
     for station in stations:
         distance = haversine(station.coord, p)
-        lst.append((station.name, station.town, distance))
+        lst.append((station.name, distance))
 
-    return sorted_by_key(lst, 2)   # Sorts list according to distance
+    return sorted_by_key(lst, 1)   # Sorts list according to distance
 
 def rivers_with_station(stations):
     """given a list of station objects, returns a container (list/tuple/set) 

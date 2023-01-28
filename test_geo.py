@@ -7,6 +7,7 @@ from floodsystem.station import MonitoringStation
 from random import random, shuffle
 from floodsystem.geo import stations_by_distance, stations_within_radius
 from test_station import test_create_monitoring_station
+from haversine import haversine
 
 
 def test_stations_by_distance():
@@ -30,7 +31,7 @@ def test_stations_by_distance():
     shuffle(lst)
     lst = stations_by_distance(lst, (1.0,4.0))
     for i in range(5):
-        assert int(lst[i].name) == i
+        assert lst[i][0] == f'some station_{i}'
     print('PASSED test_stations_by_distance()')
 
 
@@ -53,12 +54,11 @@ def test_stations_within_radius():
         sts.append(s)
     
     # Getting stations within radius [radSts = stations within radius]
-    radSts = stations_within_radius(sts, (0,0), 1000)
-    print(radSts)
+    radSts = stations_within_radius(sts, (0.0,1.0), 10000)
     assert len(radSts) == 5
     for i in radSts:
         assert type(i) == MonitoringStation
     print('PASSED test_stations_within_radius()')
 
-
+test_stations_by_distance()
 test_stations_within_radius()
