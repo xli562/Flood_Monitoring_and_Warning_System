@@ -5,7 +5,7 @@
 geographical data."""
 
 from haversine import haversine # To calculate distance on sphere given coordinates
-from .utils import sorted_by_key  # noqa -> no quality assurance. 
+from utils import sorted_by_key  # noqa -> no quality assurance. 
 '''Adding # noqa to a line indicates that the linter (a program that automatically 
 checks code quality) should not check this line. Any warnings that code may have 
 generated will be ignored.'''
@@ -29,7 +29,7 @@ def rivers_with_station(stations):
 
     river = set()
     for station in stations:
-        river.append(station.river)
+        river.add(station.river)
 
     return river
 
@@ -38,9 +38,14 @@ def stations_by_river(stations):
 
     dict = {}
     for station in stations:
-        dict[station.river] = station.name
+        common = set()
+        for station2 in stations:
+            if station2.river ==  station.river and station2.name != station.name:
+                common.add(station2.name)
+        dict[station.river] = common
     
     return dict
+
 def stations_within_radius(stations: list, centre: tuple, r: float or int) -> list:
     """A function that returns a list of all stations (type MonitoringStation) 
     within radius r of a geographic coordinate.
