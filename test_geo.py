@@ -5,8 +5,10 @@
 
 from floodsystem.station import MonitoringStation
 from random import random, shuffle
+from floodsystem.stationdata import build_station_list
 from floodsystem.geo import stations_by_distance, stations_within_radius
 from test_station import test_create_monitoring_station
+from floodsystem.geo import rivers_by_station_number
 from haversine import haversine
 
 
@@ -60,5 +62,17 @@ def test_stations_within_radius():
         assert type(i) == MonitoringStation
     print('PASSED test_stations_within_radius()')
 
+def test_rivers_by_station_number():
+
+    toomanyrivers = []
+
+    for station in build_station_list():
+        if station.river == 'River Thames':
+            toomanyrivers.append(station.name)
+    sts = [('River Thames', len(toomanyrivers))]
+
+    assert rivers_by_station_number(build_station_list(), 1) == sts
+    
 test_stations_by_distance()
 test_stations_within_radius()
+test_rivers_by_station_number()
