@@ -39,10 +39,12 @@ def stations_by_river(stations):
     dict = {}
     for station in stations:
         common = set()
+        common.add(station.name)
         for station2 in stations:
             if station2.river ==  station.river and station2.name != station.name:
                 common.add(station2.name)
         dict[station.river] = common
+        common = set()
     
     return dict
 
