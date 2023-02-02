@@ -39,12 +39,35 @@ def stations_by_river(stations):
     dict = {}
     for station in stations:
         common = set()
+        common.add(station.name)
         for station2 in stations:
             if station2.river ==  station.river and station2.name != station.name:
                 common.add(station2.name)
         dict[station.river] = common
+        common = set()
     
     return dict
+
+def rivers_by_station_number(stations, N):
+    """Implement a function that determines the N rivers with the greatest number of monitoring stations. 
+    It should return a list of (river name, number of stations) tuples, sorted by the number of stations. 
+    In the case that there are more rivers with the same number of stations as the N th entry, include these rivers in the list."""
+
+    riverflowsinyou = set()
+
+    for station in stations:   
+        common = set()
+        common.add(station.name)
+        for station2 in stations:
+             if station2.river ==  station.river:
+                 common.add(station2.name)
+        riverflowsinyou.add((station.river, len(common)))
+        common = set()
+
+    riverflowsinme = list(riverflowsinyou)
+    riverflowsinhim = sorted(riverflowsinme, key=lambda x: x[1], reverse = True)
+    return riverflowsinhim[:N]
+
 
 def stations_within_radius(stations: list, centre: tuple, r: float or int) -> list:
     """A function that returns a list of all stations (type MonitoringStation) 
