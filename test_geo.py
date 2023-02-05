@@ -11,7 +11,6 @@ from test_station import test_create_monitoring_station
 from floodsystem.geo import rivers_by_station_number
 from floodsystem.geo import rivers_with_station
 from floodsystem.geo import stations_by_river
-from haversine import haversine
 import numpy as np
 
 
