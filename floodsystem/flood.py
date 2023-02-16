@@ -1,4 +1,4 @@
-from stationdata import build_station_list, update_water_levels
+from .stationdata import build_station_list, update_water_levels
 from utils import sorted_by_key
 
 def stations_level_over_threshold(stations, tol) -> list:
