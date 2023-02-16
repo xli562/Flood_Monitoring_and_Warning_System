@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 """Unit test for the station module"""
 
-from floodsystem.station import MonitoringStation, inconsistent_typical_range_stations
+from floodsystem.station import MonitoringStation, inconsistent_typical_range_stations, create_stations_list_for_testing
 
 
 def test_create_monitoring_station():
@@ -86,4 +86,7 @@ def test_inconsistent_typical_range_stations():
         assert int(i.station_id) == counter
         counter += 1
 
-test_inconsistent_typical_range_stations()
+def test_create_stations_list_for_testing():
+    lst = create_stations_list_for_testing()
+    assert len(lst) == 5
+    print('PASSED test_create_stations_list_for_testing')

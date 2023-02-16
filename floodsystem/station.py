@@ -84,3 +84,37 @@ def inconsistent_typical_range_stations(stations) -> list:
         if station.typical_range_consistent() == False:
             inconsistant_list.append(station)
     return inconsistant_list
+
+
+def create_stations_list_for_testing() -> list:
+    """Creates a list of 5 stations for testing.
+    
+    An example of an element:
+    Station name:     some station_1
+    id:            1
+    measure id:    test-m-id-1
+    coordinate:    (6.1, -0.9000000000000004)
+    town:          My Town 1
+    river:         River 1
+    typical range: (-1.911126544120213, 3.8704108757126026)
+
+    latest level:  1.4586000733679922"""
+
+    from random import random
+    lst = []
+    for i in range(5):
+            station_id = f"{i}"
+            measure_id = f"test-m-id-{i}"
+            label = f"some station_{i}"
+            coord = (1.0 + 5.1*i, 4.0 - 4.9*i)
+            trange = (-2.3 + random(), 3.4445 + random())
+            river = f"River {i}"
+            town = f"My Town {i}"
+            s = MonitoringStation(station_id, measure_id, label, coord, trange, river, town)
+            if i == 4:
+                s.latest_level = trange[1] * 2    # Making sure at least one station exceeds the typical range
+            else:
+                s.latest_level = ((trange[0]+trange[1])/2)+random()*(trange[1]-trange[0])
+            lst.append(s)
+
+    return lst
