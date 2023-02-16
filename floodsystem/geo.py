@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 """This module contains a collection of functions related to
-geographical data."""
+geographical data. """
 
 from haversine import haversine # To calculate distance on sphere given coordinates
 from utils import sorted_by_key  # noqa -> no quality assurance. 
@@ -16,7 +16,7 @@ def stations_by_distance(stations:list, p:tuple) -> list:
     and returns a list of (station, distance) tuples, where distance (float) is 
     the distance of the station (MonitoringStation) from the coordinate p"""
 
-    lst = []     # The list to be returned
+    lst = []     # The list to be returned.
     for station in stations:
         distance = haversine(station.coord, p)
         lst.append((station.name, distance))

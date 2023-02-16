@@ -11,8 +11,8 @@ from test_station import test_create_monitoring_station
 from floodsystem.geo import rivers_by_station_number
 from floodsystem.geo import rivers_with_station
 from floodsystem.geo import stations_by_river
-from haversine import haversine
 import numpy as np
+
 
 def test_stations_by_distance():
 
@@ -64,6 +64,7 @@ def test_stations_within_radius():
         assert type(i) == MonitoringStation
     print('PASSED test_stations_within_radius()')
 
+
 def test_rivers_by_station_number():
 
     toomanyrivers = []
@@ -76,6 +77,7 @@ def test_rivers_by_station_number():
     assert rivers_by_station_number(build_station_list(), 1) == sts
     print('PASSED test_rivers_by_station_number()')
 
+
 def test_rivers_with_station():
 
     i = 0
@@ -86,6 +88,7 @@ def test_rivers_with_station():
         break
     print('PASSED test_rivers_with_station()')
 
+
 def test_stations_by_river():
     a = build_station_list()
     b = a[np.random.randint(0,len(a))]
@@ -94,9 +97,3 @@ def test_stations_by_river():
 
     assert type(sts[b.river]) == set
     print('PASSED test_stations_by_river()')
-
-test_stations_by_distance()
-test_stations_within_radius()
-test_rivers_by_station_number()
-test_rivers_with_station()
-test_stations_by_river()
