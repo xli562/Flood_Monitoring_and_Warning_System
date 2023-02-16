@@ -67,7 +67,7 @@ def update_water_levels(stations) -> None:
     """Attach level data contained in measure_data to stations"""
 
     # Fetch level data
-    measure_data = datafetcher.fetch_latest_water_level_data()
+    measure_data = datafetcher.fetch_latest_water_level_data(use_cache=True)
 
     # Build map from measure id to latest reading (value)
     measure_id_to_value = dict()
