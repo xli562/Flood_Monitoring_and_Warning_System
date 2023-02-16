@@ -39,7 +39,7 @@ class MonitoringStation:
         self.town = town
 
         self.latest_level = None
-
+    
     def __repr__(self) -> str:
         d = "Station name:     {}\n".format(self.name)
         d += "   id:            {}\n".format(self.station_id)
@@ -57,6 +57,24 @@ class MonitoringStation:
             if self.typical_range[0] < self.typical_range[1]:
                 consistancy = True
         return consistancy
+
+    def relative_water_level(self) -> float or None:
+        """returns the latest water level as a fraction of the typical range, 
+        i.e. a ratio of 1.0 corresponds to a level at the typical high 
+        and a ratio of 0.0 corresponds to a level at the typical low. 
+        If the necessary data is not available or is inconsistent, 
+        the function should return None."""
+
+        rlevel = None      # rlevel = relative water level
+        trange = self.typical_range
+        llevel = self.latest_level
+
+        if trange != None and llevel != None:
+            rlevel = (llevel - trange[0]) / (trange[1] - trange[0])
+        
+        return rlevel
+
+
 
 def inconsistent_typical_range_stations(stations) -> list:
     """A function that, given a list of station objects, returns a list of stations that have inconsistent data. """

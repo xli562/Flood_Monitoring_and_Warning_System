@@ -6,8 +6,8 @@ JSON objects fetched from the Internet and
 
 """
 
-from . import datafetcher
-from .station import MonitoringStation
+import datafetcher
+from station import MonitoringStation
 
 
 def build_station_list(use_cache=True) -> list:
@@ -63,7 +63,7 @@ def build_station_list(use_cache=True) -> list:
     return stations
 
 
-def update_water_levels(stations) -> None:
+def update_water_levels(stations: list) -> None:
     """Attach level data contained in measure_data to stations"""
 
     # Fetch level data
