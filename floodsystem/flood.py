@@ -1,4 +1,4 @@
-from .stationdata import build_station_list, update_water_levels
+from .stationdata import update_water_levels
 from utils import sorted_by_key
 
 def stations_level_over_threshold(stations, tol) -> list:
@@ -21,6 +21,23 @@ def stations_level_over_threshold(stations, tol) -> list:
 
     return sorted_by_key(lst, 1)
 
+def stations_highest_rel_level(stations: list, N: int) -> list:
+    """Remember to update water level of the stations before calling this function!
+    
+    Takes a list of MonitoringStation objects.
+    Returns a list of the N stations (objects) at which the 
+    relative water level is highest.
+    The list is sorted in descending order by relative level."""
+    stRlevel = []    # list of (Station, relative level) tuples
+    lst = []         # The final list to be outputted
+    for station in stations:
+        rlevel = station.relative_water_level()
+        if rlevel != None:
+            stRlevel.append((station, rlevel))
 
+    stRlevel = sorted_by_key(stRlevel, 1, reverse=True)
+    stRlevel = stRlevel[:N]
+    for tup in stRlevel:
+        lst.append(tup[0])
 
-
+    return lst
