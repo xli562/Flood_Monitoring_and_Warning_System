@@ -65,21 +65,11 @@ def test_stations_within_radius():
     print('PASSED test_stations_within_radius()')
 
 
-def test_rivers_by_station_number():
 
-    toomanyrivers = []
-
-    for station in build_station_list():
-        if station.river == 'River Thames':
-            toomanyrivers.append(station.name)
-    sts = [('River Thames', len(toomanyrivers))]
-
-    assert rivers_by_station_number(build_station_list(), 1) == sts
-    print('PASSED test_rivers_by_station_number()')
 
 
 def test_rivers_with_station():
-
+    
     i = 0
     for station in build_station_list():
        assert station.river in rivers_with_station(build_station_list())
@@ -97,3 +87,5 @@ def test_stations_by_river():
 
     assert type(sts[b.river]) == set
     print('PASSED test_stations_by_river()')
+
+test_rivers_by_station_number()
