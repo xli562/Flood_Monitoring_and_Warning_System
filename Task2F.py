@@ -1,4 +1,4 @@
-from floodsystem.plot import plot_water_levels
+from floodsystem.plot import plot_water_level_with_fit
 from floodsystem.datafetcher import fetch_latest_water_level_data
 from floodsystem.datafetcher import fetch_measure_levels
 import datetime
@@ -13,7 +13,7 @@ def top_water_level(x):
     #getting the data
     for w in items:
         m = dict(w)
-        #pick out all valid data because this stupid library contains useless info that cost me two hours wondering why the key wont work and the meaning of my life
+        
         measures = m.get('latestReading')
         if measures != None:
             value = measures['value']
@@ -24,7 +24,7 @@ def top_water_level(x):
     sort = sorted(rank, key=lambda x: x[1], reverse = True)
     return sort[:x]
 
-#Fetch the data for those stations
+#Get the top stations
 station1 = top_water_level(5)[0]
 station2 = top_water_level(5)[1]
 station3 = top_water_level(5)[2]
@@ -32,14 +32,10 @@ station4 = top_water_level(5)[3]
 station5 = top_water_level(5)[4]
 allstations = [station1, station2, station3, station4, station5]
 
-#Convert to parameters
-label = []
-time = []
-level = []
+#Fetch the data for top 5 stations with greatest real-time water level, using function created in Task2E
 for i in allstations:
-    label.append(i[2])
-    fetch = fetch_measure_levels(i[0], datetime.timedelta(10))
-    time.append(fetch[0])
-    level.append(fetch[1])
-
-plot_water_levels(label, time, level, share = False)
+    label = i[2]
+    fetch = fetch_measure_levels(i[0], datetime.timedelta(2))
+    time = fetch[0]
+    level = fetch[1]
+    plot_water_level_with_fit(label, time, level, 4)
