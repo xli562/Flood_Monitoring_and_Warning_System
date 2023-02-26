@@ -42,4 +42,4 @@ for i in allstations:
     time.append(fetch[0])
     level.append(fetch[1])
 
-plot_water_levels(label, time, level, share = False)
+plot_water_levels(label, time, level, sharey = False) 

@@ -2,18 +2,20 @@ from matplotlib import pyplot as plt
 from matplotlib import dates as dat
 import numpy as np
 from analysis import polyfit
+from .station import MonitoringStation
 
-def plot_water_levels(station, dates, levels, share = True):
-    "plot the water level vs. date graph of no more than 6 stations"
+def plot_water_levels(station: MonitoringStation, dates, levels, sharey = True) -> None:
+    "Plot the water level vs. date graph of no more than 6 stations"
+
     if len(dates) > 6 or len(station) > 6 or len(levels) > 6:
-        return(print("Too many stations."))
+        print("Too many stations.")
 
-    
+    # Checking data consistency
     if len(dates) != len(levels) or len(station) != len(levels) or len(dates) != len(station):
-        return(print("Number of stations do not match number of dates/levels."))
+        print("Number of stations do not match number of dates/levels.")
 
-    fig, sub = plt.subplots(len(station), sharex=True, sharey = share)
-    fig.suptitle("Water levels over past 10 days for top {} stations with greatest current relative water level".format(len(station)))
+    fig, sub = plt.subplots(len(station), sharex=True, sharey = sharey)
+    fig.suptitle(f"Water levels over past 10 days for top {len(station)} stations with greatest current relative water level")
     
     n = 0
     for n in range(len(station)):
@@ -36,8 +38,8 @@ def plot_water_levels(station, dates, levels, share = True):
         n = n + 1
 
     # Add axis labels, rotate date labels and add plot title
-    plt.xlabel('date')
-    plt.xticks(rotation=45);
+    plt.xlabel('Date')
+    plt.xticks(rotation=45)
 
     plt.show()
 

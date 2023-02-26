@@ -32,10 +32,37 @@ station4 = top_water_level(5)[3]
 station5 = top_water_level(5)[4]
 allstations = [station1, station2, station3, station4, station5]
 
-#Fetch the data for top 5 stations with greatest real-time water level, using function created in Task2E
-for i in allstations:
-    label = i[2]
-    fetch = fetch_measure_levels(i[0], datetime.timedelta(2))
-    time = fetch[0]
-    level = fetch[1]
-    plot_water_level_with_fit(label, time, level, 4)
+
+
+
+
+
+from floodsystem.datafetcher import fetch_measure_levels
+import pmdarima as pm
+from pmdarima import model_selection
+import numpy as np
+import datetime
+from datetime import timedelta
+from matplotlib import pyplot as plt
+
+
+fetch = fetch_measure_levels(station5[0], datetime.timedelta(365))
+
+data = np.asarray(fetch[1])
+
+
+train, test = model_selection.train_test_split(data, train_size=0.5)
+
+arima_model = pm.auto_arima(train, error_action='ignore', trace=True,
+                      suppress_warnings=True, maxiter=10,
+                      seasonal=True, m=12)
+#automatically fit the optimal ARIMA model for given time series
+arima_model_fitted = pm.auto_arima(data)
+# one-step out-of sample forecast
+forecast = arima_model.predict(n_periods=len(data))
+
+x = np.arange(test.shape[0])
+plt.plot(x, test)
+plt.plot(np.arange(forecast.shape[0]), forecast)
+plt.title('Actual test samples vs. forecasts')
+plt.show()
