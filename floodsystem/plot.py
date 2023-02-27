@@ -3,6 +3,7 @@ from matplotlib import dates as dat
 import numpy as np
 from analysis import polyfit
 from .station import MonitoringStation
+import datetime
 
 def plot_water_levels(station: MonitoringStation, dates, levels, sharey = True) -> None:
     "Plot the water level vs. date graph of no more than 6 stations"
@@ -45,6 +46,10 @@ def plot_water_levels(station: MonitoringStation, dates, levels, sharey = True) 
 
 def plot_water_level_with_fit(station, dates, levels, p):
     "plot the best-fit polynomial of p degrees for one station's water level vs. date graph"
+
+    if type(dates[0]) != datetime:
+        return print("Date type is wrong")
+
     plt.plot(dates, levels, '.')
 
     poly = polyfit(dates, levels, p)
