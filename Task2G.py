@@ -2,7 +2,7 @@ from floodsystem.oracle import predict
 from floodsystem.stationdata import build_station_list
 from floodsystem.stationdata import build_station_list, update_water_levels
 
-a = predict(build_station_list(), pastDays=2, futureDays = 1, stationsCount=3, usePrevExcel=True, seasonal=True)
+a = predict(build_station_list(), pastDays=2, futureDays = 1, stationsCount=3, usePrevExcel=False, seasonal=True)
 
 testation = list(a.keys())
 testlevel = list(a.values())
