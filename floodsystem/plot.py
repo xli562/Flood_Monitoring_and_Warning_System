@@ -47,8 +47,8 @@ def plot_water_levels(station: MonitoringStation, dates, levels, sharey = True) 
 def plot_water_level_with_fit(station, dates, levels, p):
     "plot the best-fit polynomial of p degrees for one station's water level vs. date graph"
 
-    if type(dates[0]) != datetime:
-        return print("Date type is wrong")
+    #if type(dates[0]) != datetime:
+        #return print("Date type is wrong")
 
     plt.plot(dates, levels, '.')
 
