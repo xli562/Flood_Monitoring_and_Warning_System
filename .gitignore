@@ -1,9 +1,3 @@
-cache/
-__pycache__/
-*tries*.py
-tries/
-*.xlsx
-
 *.pyc
 
 *.bak
