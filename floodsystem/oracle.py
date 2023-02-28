@@ -16,7 +16,7 @@ def numToABC(num: int) -> str:
 
 from openpyxl import load_workbook
 import subprocess, os
-import pyautogui
+from pyautogui import hotkey, press, write
 
 import numpy as np
 import pandas as pd
@@ -120,17 +120,17 @@ def predict(stations: list, scaleFactor: int=100000, pastDays: int | float=1, fu
         # Deleting the '@' symbols
         os.startfile(filename)
         time.sleep(2)
-        pyautogui.hotkey('ctrl', 'f')
-        pyautogui.press('tab', presses = 5, interval = 0.02)
-        pyautogui.press('right')
-        pyautogui.write('@', interval = 0.02)
-        pyautogui.press('tab', presses = 3, interval = 0.02)
-        pyautogui.press('enter')
+        hotkey('ctrl', 'f')
+        press('tab', presses = 5, interval = 0.02)
+        press('right')
+        write('@', interval = 0.02)
+        press('tab', presses = 3, interval = 0.02)
+        press('enter')
         time.sleep(2+(stationsCount-3)*0.2)
-        pyautogui.press(['enter', 'escape'], interval = 0.1)
-        pyautogui.hotkey('ctrl', 's')
+        press(['enter', 'escape'], interval = 0.1)
+        hotkey('ctrl', 's')
         time.sleep(1.5)
-        pyautogui.hotkey('alt', 'F4')
+        hotkey('alt', 'F4')
 
     # Reading from the excel file
     workbook = load_workbook(filename=filename, read_only=True, data_only=True)
